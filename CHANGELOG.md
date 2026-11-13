@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.2.1
+
+Visual refresh of the sidebar card.
+
+- Collapsed capsule now reads `● Volc余额: ¥75.65` with an external-link button next to the label that opens the Volcengine account overview in a new tab.
+- Expanded card: underline tabs (额度 / 设置), large tabular balance amount, status chip, six-pixel progress bar, three-column quota-window grid, SVG icons, and a compact updated-at footer.
+- Settings: grouped sections, credentials collapsed by default when already configured, switch controls, and a reserved-width select.
+- Rail mode (`wide=false`) collapses to a 32px balance shortcut instead of rendering the full card.
+- Removed the unused drag/overlay positioning code and the `position` setting.
+- Added empty/unconfigured and retry states; no RPC or storage-key changes.
+
 ## 0.2.0
 
 Market-ready release with in-card key management.
