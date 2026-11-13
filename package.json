@@ -73,13 +73,13 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/OWNER/dsh-volc-balance-card.git"
+    "url": "git+https://github.com/AwenJackson/dsh-volc-balance-card.git"
   },
-  "homepage": "https://github.com/OWNER/dsh-volc-balance-card#readme",
+  "homepage": "https://github.com/AwenJackson/dsh-volc-balance-card#readme",
   "bugs": {
-    "url": "https://github.com/OWNER/dsh-volc-balance-card/issues"
+    "url": "https://github.com/AwenJackson/dsh-volc-balance-card/issues"
   },
-  "author": "OWNER",
+  "author": "AwenJackson",
   "license": "MIT",
   "engines": {
     "node": ">=20",
