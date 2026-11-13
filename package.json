@@ -1,0 +1,93 @@
+{
+  "name": "dsh-volc-balance-card",
+  "version": "0.2.0",
+  "description": "Volcengine account balance and Ark plan quota card for DeepSeek Harness: a persistent sidebar-footer card showing the recharge balance (Billing QueryBalanceAcct) and Ark Agent/Coding plan windows, with an in-card AK/SK setup and per-provider display toggles.",
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "src/index.ts",
+    "src/client.ts",
+    "src/vendor",
+    "cordis.patch.yml",
+    "CHANGELOG.md",
+    "NOTICE"
+  ],
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "node test-integration.mjs",
+    "check": "node scripts/check-package.mjs",
+    "set-repo": "node scripts/set-repo.mjs",
+    "prepublishOnly": "node scripts/check-package.mjs --strict"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-connection",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-renderer",
+        "@deepseek-ai/dsh-cordis-client-runner"
+      ],
+      "immediately": true
+    },
+    "compatibility": {
+      "dsh": ">=0.2.0-rc.1 <0.3.0-0"
+    }
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "client-plugin",
+    "volcengine",
+    "volcano-engine",
+    "volcengine-ark",
+    "ark",
+    "balance",
+    "billing",
+    "quota",
+    "usage",
+    "coding-plan",
+    "sidebar"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OWNER/dsh-volc-balance-card.git"
+  },
+  "homepage": "https://github.com/OWNER/dsh-volc-balance-card#readme",
+  "bugs": {
+    "url": "https://github.com/OWNER/dsh-volc-balance-card/issues"
+  },
+  "author": "OWNER",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20",
+    "dsh": ">=0.2.0-rc.1 <0.3.0-0"
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ]
+}

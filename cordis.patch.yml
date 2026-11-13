@@ -1,0 +1,28 @@
+# dsh-volc-balance-card bundle patch：把「火山引擎余额 + 方舟套餐」卡片
+# 挂进 dsh profile。安装后由 profile 层自动应用。
+#
+# 目录（CATALOG）会自动发现已配置凭证的供应商：本包只关心火山引擎，
+# 所以只要 .credentials.yaml 里存在 VOLC_ACCESS_KEY / VOLC_SECRET_KEY，
+# 就会自动出现三行：
+#   volcengine-balance  账户充值余额（Billing QueryBalanceAcct）
+#   volcengine-agent    方舟 Agent Plan 套餐窗口
+#   volcengine-coding   方舟 Coding Plan 套餐窗口
+#
+# 想只留其中一行，用 hide: [volcengine-agent, volcengine-coding]
+# 或在卡片设置面板（齿轮 → 供应商）里勾选，前端开关优先。
+
+- insert:
+    - id: volc-balance-card
+      name: 'dsh-volc-balance-card'
+      config:
+        refreshMs: 60000
+        providers: []
+        # 当前账号没有 Agent Plan 订阅，隐藏该行避免每次都显示一条报错；
+        # 以后开通了把下面这行删掉即可。
+        hide: [volcengine-agent]
+        catalog:
+          volcengine-balance:
+            balanceTiers:
+              critical: 10
+              warn: 20
+              healthy: 50

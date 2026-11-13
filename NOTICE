@@ -1,0 +1,30 @@
+dsh-volc-balance-card
+=====================
+
+This package is a fork of dsh-quota-panel
+(https://github.com/wenzetan/dsh-quota-panel), licensed under the MIT License.
+The upstream project provided the plugin skeleton this package still builds on:
+the Volcengine request signer, the provider catalog, the host RPC surface, the
+settings UI skeleton and the vendored libraries.
+
+Changes made in this fork (see README for the user-facing view):
+
+* Added the Volcengine account balance row backed by Billing QueryBalanceAcct,
+  with balance tiers and 30s response caching.
+* Added in-card AK/SK configuration, verification and clearing through the DSH
+  credential service. The secret key is never returned to the browser.
+* Removed the ChatGPT/Codex subscription block and every proxy setting, plus
+  the related host code paths (fetch branch, auth endpoints, catalog entry).
+* Changed the surface from a draggable floating overlay to a fixed card in the
+  sidebar footer slot (sidebar.footer.action) with a collapsed capsule mode.
+
+Vendored third-party code (unchanged, kept under src/vendor and copied into
+lib/vendor by the build):
+
+* schemastery.mjs — schemastery, MIT License, Copyright (c) 2020-present
+  Shigma.
+
+Files carried over from the upstream package and then modified:
+src/index.ts, src/client.ts, cordis.patch.yml.
+
+The MIT License text applies to the whole package; see LICENSE.
