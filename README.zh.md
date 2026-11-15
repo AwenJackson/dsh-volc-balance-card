@@ -1,5 +1,7 @@
 # dsh-volc-balance-card
 
+[![dsh.so risk](https://cdn.dsh.so/badge/dsh-volc-balance-card.svg)](https://www.dsh.so/artifact/dsh-volc-balance-card/?ref=badge)
+
 [English](./README.md) · [更新记录](./CHANGELOG.md)
 
 一个 DeepSeek Harness（DSH）插件：把**火山引擎的余额**直接放到侧边栏底部常驻——账户充值余额 + 方舟 **Coding Plan / Agent Plan** 套餐窗口，后台定时刷新。
@@ -83,7 +85,9 @@ bundle 默认值写在 `cordis.patch.yml`：刷新间隔、隐藏行、余额阈
 
 ## 兼容性
 
-- DSH `>=0.2.0-rc.1 <0.3.0-0`（见 `dsh.compatibility.dsh` 与 `engines.dsh`）。
+- DSH `>=0.2.0-rc.1 <0.3.0-0`（见 `engines.dsh` 与 `dsh.compatibility.dsh`）。
+- 插件绑定的 DSH 包（宿主侧的 `@deepseek-ai/dsh-credentials`，以及 `dsh.client.inject` 里的四个客户端模块）都在 `peerDependencies` 里用同一区间声明，方便注册表与工具从 manifest 直接读到作者声明的范围。它们标记为 optional：这些包由 DSH 运行时提供，不由 npm 安装。
+- 实际跑过的版本：`0.2.2-rc.1`、`0.2.2-rc.2`、`0.2.2-rc.3`（记录在 `dsh.compatibility.dshReleases`）。
 - Node.js `>=20`。
 - 桌面端与 Web profile 通用；卡片注册在 `sidebar.footer.action` 插槽。
 

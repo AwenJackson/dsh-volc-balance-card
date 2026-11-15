@@ -1,5 +1,7 @@
 # dsh-volc-balance-card
 
+[![dsh.so risk](https://cdn.dsh.so/badge/dsh-volc-balance-card.svg)](https://www.dsh.so/artifact/dsh-volc-balance-card/?ref=badge)
+
 [中文说明](./README.zh.md) · [Changelog](./CHANGELOG.md)
 
 A DeepSeek Harness (DSH) plugin that puts **your Volcengine (火山引擎) money** in the sidebar footer: the account recharge balance plus the Ark **Coding Plan / Agent Plan** quota windows, refreshed in the background.
@@ -83,7 +85,9 @@ No telemetry, no analytics, no third-party endpoints. The browser side receives 
 
 ## Compatibility
 
-- DSH `>=0.2.0-rc.1 <0.3.0-0` (declared in `dsh.compatibility.dsh` and `engines.dsh`).
+- DSH `>=0.2.0-rc.1 <0.3.0-0` (declared in `engines.dsh` and `dsh.compatibility.dsh`).
+- The DSH packages this card binds to (`@deepseek-ai/dsh-credentials` for the host side, plus the four client modules listed in `dsh.client.inject`) are declared in `peerDependencies` with the same range, so registries and tooling that read the manifest can see what the plugin expects. They are marked optional: they are provided by the DSH runtime, not installed by npm.
+- Releases actually exercised: `0.2.2-rc.1`, `0.2.2-rc.2`, `0.2.2-rc.3` (listed in `dsh.compatibility.dshReleases`).
 - Node.js `>=20`.
 - Desktop and web profiles; the card registers into the `sidebar.footer.action` slot.
 

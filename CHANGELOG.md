@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.2.2
+
+Manifest-only release: declare the DSH packages the card binds to, and let registries see the supported range.
+
+- `peerDependencies` now lists `@deepseek-ai/dsh-credentials` and the four client modules from `dsh.client.inject` (`dsh-client-connection`, `dsh-client-locale`, `dsh-client-ui-renderer`, `dsh-cordis-client-runner`) with the `">=0.2.0-rc.1 <0.3.0-0 || >=0.2.1-0 <0.3.0-0 || >=0.2.2-0 <0.3.0-0"` range, all marked `optional` because the DSH runtime supplies them. Registries that read the manifest (dsh.so, npm) can now report the author-declared range instead of "not declared".
+- `dsh.compatibility.dsh` now carries the same `||` branches, and `dsh.compatibility.dshReleases` records the releases this card was actually exercised on (`0.2.2-rc.1`, `0.2.2-rc.2`, `0.2.2-rc.3`).
+- README (both languages) shows the dsh.so risk badge and documents the peer declaration.
+- No runtime code change: `lib/` output is byte-identical to 0.2.1.
+
 ## 0.2.1
 
 Visual refresh of the sidebar card.
