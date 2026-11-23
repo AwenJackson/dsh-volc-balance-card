@@ -11,11 +11,13 @@ DSH 插件市场（dshmarket）**只允许安装 awesome-dsh-plugin 精选列表
 | 代码推到 GitHub `main`（含 `lib/` 构建产物） | ✅ 已完成 |
 | `package.json` 的 `repository` / `homepage` / `bugs` / `author` | ✅ 已指向 `AwenJackson/dsh-volc-balance-card` |
 | GitHub topic `dsh-plugin` | ✅ 已加（另加 `dsh`、`deepseek-harness`、`volcengine`、`balance`、`sidebar`） |
-| Release `v0.2.0` + 资产 `dsh-volc-balance-card.tgz` | ✅ [已发布](https://github.com/AwenJackson/dsh-volc-balance-card/releases/latest/download/dsh-volc-balance-card.tgz) |
-| 投稿 yml | ✅ `market/AwenJackson__dsh-volc-balance-card.yml` |
-| 仓库创建满 1 天 | ⏳ 仓库创建于 2026-11-13 12:25(+08:00)，**最早 2026-11-14 12:25 之后**才能提 PR |
-| 提 PR 到 awesome-dsh-plugin | ⬜ 等上面那条满足后执行「提 PR 实操」 |
-| npm 发布 | ⬜ 可选，与收录无关；要发就按第 3 节自行发布 |
+| Release `v0.2.3` + 资产 `dsh-volc-balance-card.tgz` | ✅ [已发布](https://github.com/AwenJackson/dsh-volc-balance-card/releases/latest/download/dsh-volc-balance-card.tgz)（`latest/download` 现解析到 0.2.3） |
+| 投稿 yml | ✅ `market/AwenJackson__dsh-volc-balance-card.yml`，与上游 `data/plugins/AwenJackson__dsh-volc-balance-card.yml` 一致 |
+| 仓库创建满 1 天 | ✅ 仓库创建于 2026-11-13 12:25(+08:00) |
+| 提 PR 到 awesome-dsh-plugin | ✅ 已合并：[#15140](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/pull/15140)（2026-11-14） |
+| npm 发布 | ⬜ 未发布。**这会影响市场搜索**：`dsh-plugin-catalog` / `dshfind` 的 `index.json` 只收 npm 已发布包，GitHub-only 条目只出现在 README 列表里 |
+
+> 已收录之后不需要再提 PR：列表 yml 用的是 `releases/latest/download/...`，发新 Release 即让所有通过列表安装的人拿到新版本。只有在**改 `url`、分类或描述**时才需要再提一次 PR。
 
 在收录完成之前，任何人都已经可以手动装：下载上面的 tgz，在 DSH 里 `plugin_manager install_bundle` 指向该文件即可（或直接用 `file:` spec）。
 
@@ -33,7 +35,7 @@ DSH 插件市场（dshmarket）**只允许安装 awesome-dsh-plugin 精选列表
 
 > 「仓库满 1 天」是自动 CI 检查，目的是过滤「PR 前几分钟才建好的仓库」。差一点就被打回的话，把活干完再提交即可，重新提交不会有任何负面影响。
 
-## 提 PR 实操（仓库满 1 天后执行）
+## 提 PR 实操（记录：本条已于 2026-11-14 合并，保留作换 owner / 改分类时复用）
 
 需要的材料只有一份文件，已经在 `market/AwenJackson__dsh-volc-balance-card.yml` 里：
 
