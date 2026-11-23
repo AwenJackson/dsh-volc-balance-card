@@ -8,8 +8,11 @@
 #   volcengine-agent    方舟 Agent Plan 套餐窗口
 #   volcengine-coding   方舟 Coding Plan 套餐窗口
 #
+# Agent Plan 行默认也显示：账号没订阅时它是一条中性的「未开通」提示，
+# 不是报错；订阅后同一行自动变成 5h / 周 / 月三条用量窗口。
+#
 # 想只留其中一行，用 hide: [volcengine-agent, volcengine-coding]
-# 或在卡片设置面板（齿轮 → 供应商）里勾选，前端开关优先。
+# 或在卡片设置面板（齿轮 → 显示）里勾选，前端开关优先。
 
 - insert:
     - id: volc-balance-card
@@ -17,9 +20,6 @@
       config:
         refreshMs: 60000
         providers: []
-        # 当前账号没有 Agent Plan 订阅，隐藏该行避免每次都显示一条报错；
-        # 以后开通了把下面这行删掉即可。
-        hide: [volcengine-agent]
         catalog:
           volcengine-balance:
             balanceTiers:

@@ -141,7 +141,7 @@ if (all.ok) {
 	if (!live) check('balance amount matches the canned response', balance?.view?.amount === 80.1, balance?.view?.amount);
 	check('coding row reports windows', coding?.view?.kind === 'usage' && Object.keys(coding.view.windows ?? {}).length > 0, coding);
 	if (!live) check('coding monthly percent is 12', coding?.view?.windows?.monthly?.percent === 12, coding?.view?.windows);
-	check('agent row reports the missing subscription', typeof agent?.error === 'string' && agent.error.startsWith('No active Volcengine Ark Agent Plan'), agent);
+	check('agent row reports the missing subscription as a notice, not an error', agent?.view?.notice === 'agent-plan-absent' && agent?.error === undefined, agent);
 } else {
 	check('fetch-all succeeded', false, all.error);
 }

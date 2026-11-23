@@ -23,7 +23,7 @@ Expanded card:
 | --- | --- | --- |
 | 火山引擎余额 | `billing.volcengineapi.com` · `QueryBalanceAcct` | available balance, cash balance, arrears, freeze, account ID |
 | 方舟 Coding 套餐 | `open.volcengineapi.com` · `GetCodingPlanUsage` | rolling / weekly / monthly windows with reset times |
-| 方舟 Agent 套餐 | `open.volcengineapi.com` · `GetAFPUsage` | Agent Plan windows (only when the account has a plan) |
+| 方舟 Agent 套餐 | `open.volcengineapi.com` · `GetAFPUsage` | Agent Plan windows; a neutral **未开通 / Not subscribed** chip when the account has no plan |
 
 Rows are colour-coded from the balance thresholds (default: < ¥10 critical, < ¥20 warning, ≥ ¥50 healthy) and from the plan usage percentages (default: ≥70% warning, ≥90% critical).
 
@@ -70,7 +70,7 @@ Open the card's ⚙ panel:
 
 The balance response is cached for 30s per credential, so a 15s refresh does not hammer the Billing API.
 
-Bundle defaults live in `cordis.patch.yml`: refresh interval, hidden rows, and balance tiers. The patch ships with `hide: [volcengine-agent]`, because an account without an Agent Plan subscription would otherwise always show one error row — delete that line after subscribing.
+Bundle defaults live in `cordis.patch.yml`: refresh interval and balance tiers. All three rows are enabled by default; the Agent Plan row stays useful without a subscription because it renders a neutral **未开通** state instead of a red error, and turns into live 5h / weekly / monthly windows by itself once the plan is bought.
 
 ## Network and privacy
 

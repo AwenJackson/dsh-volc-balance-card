@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.2.3
+
+Agent Plan row is now always visible, and an unsubscribed account reads as a state instead of a failure.
+
+- The host half returns a neutral `notice: 'agent-plan-absent'` view when `GetAFPUsage` succeeds but every 5h / weekly / monthly window reports `Quota=0` (verified against a real account: `PlanType: ""`, all quotas 0). Previously that case returned an error string, so the row rendered as a red failure.
+- Genuine failures are unchanged: a bad signature, a missing permission or an HTTP error is still thrown by `volcengineCall` and still surfaces as an error row.
+- The client renders notices with a muted `state-idle` chip and localized copy (`未开通` / `Not subscribed`, plus a one-line hint) instead of a measurement value.
+- The bundle patch no longer ships `hide: [volcengine-agent]`, so all three rows are enabled by default; buying the plan turns the row into live windows with no config change.
+- `test-integration.mjs` asserts the notice shape in both offline and live modes (`npm test` passes against the real account).
+- README (EN/ZH) updated: the Agent Plan row documents the not-subscribed state, and the "hidden by default" note is gone.
+
 ## 0.2.2
 
 Manifest-only release: declare the DSH packages the card binds to, and let registries see the supported range.

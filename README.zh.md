@@ -23,7 +23,7 @@
 | --- | --- | --- |
 | 火山引擎余额 | `billing.volcengineapi.com` · `QueryBalanceAcct` | 可用余额、现金余额、欠费、冻结金额、账号 ID |
 | 方舟 Coding 套餐 | `open.volcengineapi.com` · `GetCodingPlanUsage` | 滚动 / 周 / 月三个窗口及重置时间 |
-| 方舟 Agent 套餐 | `open.volcengineapi.com` · `GetAFPUsage` | Agent Plan 窗口（账号有套餐时才出现） |
+| 方舟 Agent 套餐 | `open.volcengineapi.com` · `GetAFPUsage` | Agent Plan 窗口；账号没订阅时显示中性的 **未开通** 标签，不是报错 |
 
 余额按阈值变色（默认：低于 ¥10 危险、低于 ¥20 预警、≥ ¥50 健康），套餐按用量百分比变色（默认 ≥70% 预警、≥90% 危险）。
 
@@ -70,7 +70,7 @@
 
 余额响应按凭证缓存 30 秒，所以即使设成 15s 刷新也不会对 Billing API 造成压力。
 
-bundle 默认值写在 `cordis.patch.yml`：刷新间隔、隐藏行、余额阈值。补丁默认带 `hide: [volcengine-agent]`——没开通 Agent Plan 的账号否则会常驻一条报错行，开通后把这一行删掉即可。
+bundle 默认值写在 `cordis.patch.yml`：刷新间隔与余额阈值。三行默认全部显示——Agent Plan 行在没订阅时是一条中性的「未开通」提示，不会变成一条红色报错；订阅之后同一行会自动变成 5h / 周 / 月三条用量窗口，不用改配置。
 
 ## 网络与隐私
 

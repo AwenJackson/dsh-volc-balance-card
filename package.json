@@ -1,6 +1,6 @@
 {
   "name": "dsh-volc-balance-card",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Volcengine account balance and Ark plan quota card for DeepSeek Harness: a persistent sidebar-footer card showing the recharge balance (Billing QueryBalanceAcct) and Ark Agent/Coding plan windows, with an in-card AK/SK setup and per-provider display toggles.",
   "type": "module",
   "main": "lib/index.js",

@@ -80,6 +80,8 @@
 				usageUnavailable: "暂时无法获取用量",
 				quotaUnavailable: "暂时无法获取配额",
 				balanceUnavailable: "暂时无法获取余额",
+				noticeAgentPlanAbsent: "未开通",
+				noticeAgentPlanAbsentHint: "该账号未订阅方舟 Agent Plan，开通后自动显示用量",
 				balanceAbnormal: "余额数据异常",
 				winRolling: "滚", winWeekly: "周", winMonthly: "月", winSearch: "搜索",
 				settingsCapsule: "胶囊显示",
@@ -165,6 +167,8 @@
 				usageUnavailable: "Usage unavailable",
 				quotaUnavailable: "Quota unavailable",
 				balanceUnavailable: "Balance unavailable",
+				noticeAgentPlanAbsent: "Not subscribed",
+				noticeAgentPlanAbsentHint: "This account has no Ark Agent Plan — usage appears here once subscribed",
 				balanceAbnormal: "Malformed balance data",
 				winRolling: "Roll", winWeekly: "Wk", winMonthly: "Mo", winSearch: "Search",
 				settingsCapsule: "Capsule display",
@@ -278,6 +282,7 @@
 			"#dsh-quota-card .state-warn .dsh-status-chip{color:var(--vbc-warn);background:rgba(245,158,11,.12);background:color-mix(in srgb,var(--vbc-warn) 14%,transparent)}",
 			"#dsh-quota-card .state-error .dsh-status-chip{color:var(--vbc-error);background:rgba(239,68,68,.10);background:color-mix(in srgb,var(--vbc-error) 12%,transparent)}",
 			"#dsh-quota-card .state-info .dsh-status-chip{color:var(--vbc-accent);background:rgba(65,118,230,.10);background:color-mix(in srgb,var(--vbc-accent) 12%,transparent)}",
+			"#dsh-quota-card .state-idle .dsh-status-chip{color:var(--vbc-text-3);background:var(--dsw-alias-bg-overlay,#ebeef2);background:color-mix(in srgb,var(--vbc-text-3) 12%,transparent)}",
 			"#dsh-quota-card .dsh-balance-amount{margin-top:1px;color:var(--vbc-text);font-size:26px;font-weight:650;line-height:1.15;letter-spacing:-.02em;font-variant-numeric:tabular-nums}",
 			"#dsh-quota-card .dsh-balance-currency{margin-right:1px;font-size:.68em;font-weight:600;color:var(--vbc-text-2)}",
 			"#dsh-quota-card .state-warn .dsh-balance-amount{color:var(--vbc-warn)}",
@@ -427,6 +432,22 @@
 		}
 
 		/**
+		 * Notice ids the host may attach to a view. A notice is a normal state
+		 * ("this plan is not subscribed"), not a failure, so it renders with the
+		 * neutral idle styling and a translated label instead of a red error.
+		 */
+		var NOTICE_TEXT = {
+			"agent-plan-absent": "noticeAgentPlanAbsent"
+		};
+
+		/** Localized label for a host notice id, falling back to the host text. */
+		function noticeCopy(t, id, fallback) {
+			var key = NOTICE_TEXT[id];
+			var text = key ? t(key) : "";
+			return text && text !== key ? text : String(fallback || id || "—");
+		}
+
+		/**
 		 * Row view model: status + texts for one provider spec + its
 		 * host-normalized view (kind balance / usage / info). Threshold
 		 * judgement stays client-side so local settings overrides apply
@@ -443,6 +464,20 @@
 				};
 			}
 			var view = entry.view || {};
+			// A host "notice" (e.g. agent-plan-absent) carries the same `info`
+			// shape as a plain info row but means "nothing is wrong, there is just
+			// no subscription yet": drop the error styling and use a neutral chip.
+			if (view.notice) {
+				var noticeText = noticeCopy(t, view.notice, view.text);
+				var noticeHint = view.notice === "agent-plan-absent" ? t("noticeAgentPlanAbsentHint") : "";
+				return {
+					kind: "info", status: "idle", notice: view.notice,
+					summary: noticeText, value: null,
+					sub: noticeHint || null, usageText: null, windows: [], reset: "",
+					barPercent: 0, caption: "",
+					title: view.title || noticeHint || noticeText
+				};
+			}
 			if (view.kind === "usage") {
 				var w = view.windows || {};
 				var winPct = function (name) {
@@ -643,6 +678,10 @@
 			var headChildren = [React.createElement("div", { key: "name", className: "dsh-provider-name-wrap" }, nameChildren)];
 			if (isBalance) {
 				if (view.sub) headChildren.push(React.createElement("span", { key: "chip", className: "dsh-status-chip" }, view.sub));
+			} else if (view.notice) {
+				// A notice is a state label, not a measurement: the muted chip keeps
+				// it from reading like a value of its own.
+				headChildren.push(React.createElement("span", { key: "chip", className: "dsh-status-chip" }, view.summary));
 			} else {
 				headChildren.push(React.createElement("span", { key: "value", className: "dsh-provider-value" }, view.summary));
 			}
